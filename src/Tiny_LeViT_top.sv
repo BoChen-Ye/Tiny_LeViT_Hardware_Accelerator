@@ -151,15 +151,7 @@ module Tiny_LeViT_top(
 
 	//synchronizer
 
-	
 	DFF2#(2*conv4_width) u_ff2_1(.*,.d_in(w_22),.d_out(w_22_d2));
-	DFF2#(att_width) u_sff1(.*,.d_in(s1_1),.d_out(s1_1_d1));
-	DFF1#(att_width) u_sff2(.*,.d_in(s1_2),.d_out(s1_2_d1));
-	DFF1#(att_width) u_sff3(.*,.d_in(s1_3),.d_out(s1_3_d1));
-	DFF1#(att_width) u_sff4(.*,.d_in(s1_4),.d_out(s1_4_d1));
-	DFF1#(att_width) u_sff5(.*,.d_in(s1_5),.d_out(s1_5_d1));
-	DFF1#(att_width) u_sff6(.*,.d_in(s1_6),.d_out(s1_6_d1));
-	DFF1#(att_width) u_sff7(.*,.d_in(s1_7),.d_out(s1_7_d1));
 
 	//enable generate
 	Enable u_en_conv8(.*,.in_s(end_conv16),.in_e(end_conv8),.o_en(en_conv8),.o_en_d1());
