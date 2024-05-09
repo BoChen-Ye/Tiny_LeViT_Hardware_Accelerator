@@ -3,10 +3,11 @@
 module tb_2D;
 	import definition::*;
 	bit clk,rstn,en;
-	logic [2*conv4_width-1:0] i_r1,i_r2;
-	logic [4*conv4_width-1:0] o_mat;
+	logic [conv4_width-1:0] i_r1,i_r2;
+	logic [2*conv4_width-1:0] o_mat;
+	logic o_flag;
 	
-	PE_2D u_pe(
+	PE_2D#(conv4_width) u_pe(
 		.*
 	);
 
@@ -38,6 +39,6 @@ module tb_2D;
 		#20 i_r1 <= 'd0;
 			i_r2 <= 'd0;
 			
-		#20	en<=0;
+		#100	en<=0;
     end	
 endmodule

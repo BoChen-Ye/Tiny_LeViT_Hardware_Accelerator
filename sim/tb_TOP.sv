@@ -1,25 +1,39 @@
 `timescale 1ns / 1ps
 
-module tb_conv16;
+module tb_TOP;
 	import definition::*;
 	bit clk,rstn,en;
 	logic [conv16_width-1:0] i_r1,i_r2,i_r3,i_r4,i_r5,i_r6,i_r7,
 					  i_r8,i_r9,i_r10,i_r11,i_r12,i_r13,i_r14,i_r15,i_r16;
-	logic [conv16_width-1:0] i_f1,i_f2,i_f3;
-	logic [2*conv16_width-1:0] o_sum1,o_sum2,o_sum3,o_sum4,o_sum5,o_sum6,o_sum7,o_sum8;
-	logic end_conv16;
-	Conv16_core u_conv(
+	logic [conv16_width-1:0] conv16_f1,conv16_f2,conv16_f3;
+	logic [conv8_width-1:0]  conv8_f1,conv8_f2,conv8_f3;
+	logic [conv4_width-1:0]  conv4_f1,conv4_f2,conv4_f3;
+	
+	logic [att_width-1:0] bias;
+	logic end_sig;
+	logic [att_width-1:0] result;
+	
+	Tiny_LeViT_top u_top
+	(
 		.*
 	);
-	
+		
 	always #10 clk <= ~clk;
-	 
+	
 	initial begin
         rstn <=0;
 		
-        i_f1 <= 'd0;
-		i_f2 <= 'd0;
-		i_f3 <= 'd0;
+		conv16_f1 <= 'd0;
+		conv16_f2 <= 'd0;
+		conv16_f3 <= 'd0;
+		
+		conv8_f1 <= 'd0;
+		conv8_f2 <= 'd0;
+		conv8_f3 <= 'd0;
+		
+		conv4_f1 <= 'd0;
+		conv4_f2 <= 'd0;
+		conv4_f3 <= 'd0;
 		
 		i_r1 <= 'd0;
 		i_r2 <= 'd0;
@@ -37,30 +51,66 @@ module tb_conv16;
 		i_r14<= 'd0;
 		i_r15<= 'd0;
 		i_r16<= 'd0;
+		
+		bias<='d0;
+		en<=0;
+
 		#10 rstn <=1;
 			en<=1;
-		
+			bias<='d9;
 	end
-	
 	initial begin	
-        #30 i_f1 <= 'd1;
-			i_f2 <= 'd4;
-			i_f3 <= 'd7;
+        #30 conv16_f1 <= 'd1;
+			conv16_f2 <= 'd4;
+			conv16_f3 <= 'd7;
 			
-        #20 i_f1 <= 'd2;
-			i_f2 <= 'd5;
-			i_f3 <= 'd8;
+        #20 conv16_f1 <= 'd2;
+			conv16_f2 <= 'd5;
+			conv16_f3 <= 'd8;
 			
-		#20 i_f1 <= 'd3;
-			i_f2 <= 'd6;
-			i_f3 <= 'd9;
+		#20 conv16_f1 <= 'd3;
+			conv16_f2 <= 'd6;
+			conv16_f3 <= 'd9;
 			
-		#20 i_f1 <= 'd0;
-			i_f2 <= 'd0;
-			i_f3 <= 'd0;	
+		#20 conv16_f1 <= 'd0;
+			conv16_f2 <= 'd0;
+			conv16_f3 <= 'd0;
+			 
+		#140 conv8_f1 <= 'd11;
+			 conv8_f2 <= 'd14;
+			 conv8_f3 <= 'd17;
+			 
+			 
+		#20  conv8_f1 <= 'd12;
+			 conv8_f2 <= 'd15;
+			 conv8_f3 <= 'd18;
+
+		#20  conv8_f1 <= 'd13;
+			 conv8_f2 <= 'd16;
+			 conv8_f3 <= 'd19;
+			 
+		#20	 conv8_f1 <= 'd0;
+			 conv8_f2 <= 'd0;
+			 conv8_f3 <= 'd0;
+			 
+		#120 conv4_f1 <= 'd11;
+			 conv4_f2 <= 'd12;
+			 conv4_f3 <= 'd13;
+						  
+        #20 conv4_f1 <= 'd14;
+			conv4_f2 <= 'd15;
+			conv4_f3 <= 'd16;
+						
+		#20 conv4_f1 <= 'd17;
+			conv4_f2 <= 'd18;
+			conv4_f3 <= 'd19;
+			
+		#20 conv4_f1 <= 'd0;
+			conv4_f2 <= 'd0;
+			conv4_f3 <= 'd0;	
 	end
-	initial begin		
-		#30 i_r1 <= 'd1;
+	initial begin
+        #30 i_r1 <= 'd1;
 			i_r2 <= 'd1;
 			i_r3 <= 'd1;
 			i_r4 <= 'd1;
@@ -316,22 +366,7 @@ module tb_conv16;
 		    i_r14<= 'd16;
 			i_r15<= 'd16;
 			i_r16<= 'd16;
-		#20 i_r1 <= 'd0;
-			i_r2 <= 'd0;
-			i_r3 <= 'd0;
-			i_r4 <= 'd0;
-			i_r5 <= 'd0;
-			i_r6 <= 'd0;
-		    i_r7 <= 'd0;
-		    i_r8 <= 'd0;
-		    i_r9 <= 'd0;
-		    i_r10<= 'd0;
-		    i_r11<= 'd0;
-		    i_r12<= 'd0;
-		    i_r13<= 'd0;
-		    i_r14<= 'd0;
-			i_r15<= 'd0;
-			i_r16<= 'd0;
-		#20	en<=0;
+		#20 en<=0;
+			
     end
 endmodule

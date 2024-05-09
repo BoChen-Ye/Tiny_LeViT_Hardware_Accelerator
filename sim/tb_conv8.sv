@@ -3,10 +3,10 @@
 module tb_conv8;
 	import definition::*;
 	bit clk,rstn,en;
-	logic [width-1:0] i_r1,i_r2,i_r3,i_r4,i_r5,i_r6,i_r7,i_r8;
-	logic [width-1:0] i_f1,i_f2,i_f3;
-	logic [2*width-1:0] o_sum1,o_sum2,o_sum3,o_sum4;
-	
+	logic [conv8_width-1:0] i_r1,i_r2,i_r3,i_r4,i_r5,i_r6,i_r7,i_r8;
+	logic [conv8_width-1:0] i_f1,i_f2,i_f3;
+	logic [2*conv8_width-1:0] o_sum1,o_sum2,o_sum3,o_sum4;
+	logic end_conv8;
 	Conv8_core u_conv(
 		.*
 	);

@@ -2,9 +2,9 @@
 
 module tb_perow8;
 	import definition::*;
-	bit clk,rstn,en;
-	logic [width-1:0] i_r,i_f;	
-	logic [2*width-1:0] o_psum;
+	bit clk,rstn,en,end_pe;
+	logic [conv8_width-1:0] i_r,i_f;	
+	logic [2*conv8_width-1:0] o_psum;
 	PE_ROW8 u_row(
 		.*
 	);

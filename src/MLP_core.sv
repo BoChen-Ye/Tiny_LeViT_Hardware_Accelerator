@@ -1,26 +1,12 @@
 `timescale 1ns / 1ps
-//////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 2024/04/18 21:12:33
-// Design Name: 
-// Module Name: MLP_core
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
-//////////////////////////////////////////////////////////////////////////////////
-
-
-module MLP_core(
-
+//this is MLP layer which is use 1D Conv of Tiny LeViT
+import definition::*;
+module MLP_core#(K=3)
+(	input en,
+	input [mlp_w-1:0] data_in,
+	output[mlp_w-1:0] data_out
     );
+	
+	assign data_out=en? data_in * K: 'd0;
+	
 endmodule

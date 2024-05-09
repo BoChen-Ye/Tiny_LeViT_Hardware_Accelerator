@@ -5,6 +5,7 @@ import definition::*;
 module PE_ROW16(
 	input clk,rstn,en,
 	input [conv16_width-1:0] i_f,i_r,
+	output logic end_pe,
 	output [2*conv16_width-1:0] o_psum
     );
 	logic en_d1,en_d2;
@@ -20,14 +21,14 @@ module PE_ROW16(
 	logic full;
 	
 	//pe array
-	PE_MAC #(.width(conv16_width)) u_mac1 (.*,.i_f(f_in),  .i_m(m1 ),.o_f(next1 ),o_r(),.o_mac(mac1 ));
-	PE_MAC #(.width(conv16_width)) u_mac2 (.*,.i_f(next1 ),.i_m(m2 ),.o_f(next2 ),o_r(),.o_mac(mac2 ));
-	PE_MAC #(.width(conv16_width)) u_mac3 (.*,.i_f(next2 ),.i_m(m3 ),.o_f(next3 ),o_r(),.o_mac(mac3 ));
-	PE_MAC #(.width(conv16_width)) u_mac4 (.*,.i_f(next3 ),.i_m(m4 ),.o_f(next4 ),o_r(),.o_mac(mac4 ));
-	PE_MAC #(.width(conv16_width)) u_mac5 (.*,.i_f(next4 ),.i_m(m5 ),.o_f(next5 ),o_r(),.o_mac(mac5 ));
-	PE_MAC #(.width(conv16_width)) u_mac6 (.*,.i_f(next5 ),.i_m(m6 ),.o_f(next6 ),o_r(),.o_mac(mac6 ));
-	PE_MAC #(.width(conv16_width)) u_mac7 (.*,.i_f(next6 ),.i_m(m7 ),.o_f(next7 ),o_r(),.o_mac(mac7 ));
-	PE_MAC #(.width(conv16_width)) u_mac8 (.*,.i_f(next7 ),.i_m(m8 ),.o_f(next8 ),o_r(),.o_mac(mac8 ));
+	PE_MAC #(.width(conv16_width)) u_mac1 (.*,.i_f(f_in),  .i_m(m1 ),.o_f(next1 ),.o_r(),.o_mac(mac1 ));
+	PE_MAC #(.width(conv16_width)) u_mac2 (.*,.i_f(next1 ),.i_m(m2 ),.o_f(next2 ),.o_r(),.o_mac(mac2 ));
+	PE_MAC #(.width(conv16_width)) u_mac3 (.*,.i_f(next2 ),.i_m(m3 ),.o_f(next3 ),.o_r(),.o_mac(mac3 ));
+	PE_MAC #(.width(conv16_width)) u_mac4 (.*,.i_f(next3 ),.i_m(m4 ),.o_f(next4 ),.o_r(),.o_mac(mac4 ));
+	PE_MAC #(.width(conv16_width)) u_mac5 (.*,.i_f(next4 ),.i_m(m5 ),.o_f(next5 ),.o_r(),.o_mac(mac5 ));
+	PE_MAC #(.width(conv16_width)) u_mac6 (.*,.i_f(next5 ),.i_m(m6 ),.o_f(next6 ),.o_r(),.o_mac(mac6 ));
+	PE_MAC #(.width(conv16_width)) u_mac7 (.*,.i_f(next6 ),.i_m(m7 ),.o_f(next7 ),.o_r(),.o_mac(mac7 ));
+	PE_MAC #(.width(conv16_width)) u_mac8 (.*,.i_f(next7 ),.i_m(m8 ),.o_f(next8 ),.o_r(),.o_mac(mac8 ));
 	
 	//buffer3 store
 	always_ff@(posedge clk, negedge rstn)begin
@@ -121,6 +122,7 @@ module PE_ROW16(
 			m5<='b0;m6<='b0;m7<='b0;m8<='b0;
 			f_in<='b0;
 			psum<='b0;
+			end_pe<=1'b0;
 		end
 		S3: begin			
 			m1<='b0;
@@ -133,11 +135,13 @@ module PE_ROW16(
 		S5:begin			
 			m1<=buffer_16[1];m2<=buffer_16[2];m3<=buffer_16[3];
 			f_in<=buffer_3[2];
+			
 		end
 		S6:begin
 			m1<='b0;
 			m2<=buffer_16[3];m3<=buffer_16[4];m4<=buffer_16[5];
 			psum<=mac1;
+			end_pe<=1'b1;
 		end
         S7:begin
 			m2<='b0;
@@ -178,6 +182,7 @@ module PE_ROW16(
 				m5<='b0;m6<='b0;m7<='b0;m8<='b0;
 				f_in<='b0;
 				psum<='b0;
+				end_pe<=1'b0;
 				end
 	  endcase
 	end

@@ -3,10 +3,10 @@
 module tb_pemac;
 	import definition::*;
 	bit clk,rstn;
-	logic [width-1:0] i_m,i_f,o_next;
-	logic [2*width-1:0] o_mac;
+	logic [7:0] i_m,i_f,o_f,o_r;
+	logic [15:0] o_mac;
 	
-	PE_MAC u_mac(
+	PE_MAC#(8) u_mac(
 		.*	
 	);
 	

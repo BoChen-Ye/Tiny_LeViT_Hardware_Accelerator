@@ -2,9 +2,9 @@
 
 module tb_perow16;
 	import definition::*;
-	bit clk,rstn,en;
-	logic [width-1:0] i_r,i_f;
-	logic [2*width-1:0] o_psum;
+	bit clk,rstn,en,end_pe;
+	logic [conv16_width-1:0] i_r,i_f;
+	logic [2*conv16_width-1:0] o_psum;
 	PE_ROW16 u_row(
 		.*
 	);

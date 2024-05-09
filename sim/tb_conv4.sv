@@ -3,9 +3,10 @@
 module tb_conv4;
 	import definition::*;
 	bit clk,rstn,en;
-	logic [width-1:0] i_r1,i_r2,i_r3,i_r4;
-	logic [width-1:0] i_f1,i_f2,i_f3;
-	logic [2*width-1:0] o_sum1,o_sum2;
+	logic [conv4_width-1:0] i_r1,i_r2,i_r3,i_r4;
+	logic [conv4_width-1:0] i_f1,i_f2,i_f3;
+	logic [2*conv4_width-1:0] o_sum1,o_sum2;
+	logic end_conv4;
 	
 	Conv4_core u_conv(
 		.*
