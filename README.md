@@ -60,6 +60,8 @@
 
 ### Attention_core
 - For attention layer, use Tanh instead of softmax and use ReLU instead of Hardswish to simplify that difficulty of hardware calculation.
+- Tanh function is a complex module in this core.
+- We need buffer to store the data and do matrix multiplicayion.
 
 ![attention](figure/attention.png)
 
@@ -69,12 +71,20 @@
 ![PE_2D](figure/pe_2d.png)
 
 ### Tanh
+- formula of tanh is $\frac{e^x-e^(-x)}{e^x+e^(-x)}$.
+- This module contain two Exp module and 1 divider.
 
 ![tanh](figure/tanh.png)
 
 #### Divider
+- Divider is a basic module which is combinational logic.
+- ```i_up``` and ```i_bo``` indicate the two input(up and down).
+- ```cout``` is the result and ```rem``` is remainder.
 
 #### Exp
+- In order to calculate the exponential function, we use the expansion to approximate the fourth order.
+- The formula is $exp(x)=1+x(1+\frac{x}{2} (1+\frac{x}{3}(1+\frac{x}{4})))$.
+- This module also use 1 divider.
 
 ![exp](figure/exp.png)
 
