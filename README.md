@@ -17,9 +17,15 @@
 ## Network Architecture
 - ```src/Tiny_LeViT_top.sv``` is the top level of Tiny_LeViT. It contain three convolutional layer(16,8,4), four stage1(2-head attention and MLP) and stage2(4-head attention and MLP). In the end, it has e average pooling module.
 - Define every parameter in ```src/definition.sv```.
+- Input number is 8-bit, but it will change in later module.
+- Most of module have two signals or flags: ```end``` which indicate output result and ```en``` which enable the module. 
+
+![Tiny_LeViT_architecture](figure/arch.png)
 
 ### DFF2
 - This is synchronizer which have two D flip-flop.
+
+![DFF2](figure/DFF2.png)
 
 ### Enable
 - This module can generate enable signal accroding to last module's end signal and their own end signal. It seems like handshake.
@@ -29,29 +35,53 @@
 - ```src/Conv_core_sa.sv``` and ```src/PE_ROW_SystolicArry.sv``` is normal version of convolution layer which delay is only 3 cycle from input data to first output data.
 - Other convolutional core aim to accelerate the convolutional layer when stride=2 and padding=1. Delay: ```src/Conv16_core.sv```: 10 cycle, ```src/Conv8_core.sv```: 6 cycle,```src/Conv4_core.sv```: 4 cycle.
 
+![conv_core](figure/conv_core.png)
+
 ### PE_ROW
-- Use Systolic array to do 1D convolution. Use FSM to control the data flow.
+- Use 1D Systolic array to do 1D convolution. Use FSM to control the data flow.
+
+![PE_row](figure/pe_row.png)
+
 #### PE_MAC 
 - The basic PE which can only support multiply and accumulate operation.
 
+![PE_mac](figure/PE_mac.png)
+
+## Stage
+- Stage module contain 2-head attention or 4-head attention and then 2 MLP layer.
+
+![stage](figure/stage.png)
+
 ## Multi-head(2/4) Attention layer
+- ```src/Stage_2head.sv``` have 2 attention core and 1 MLP.
+- ```src/Stage_4head.sv``` have 4 attention core and 1 MLP.
+
+![multi-head](figure/multi-head.png)
 
 ### Attention_core
 - For attention layer, use Tanh instead of softmax and use ReLU instead of Hardswish to simplify that difficulty of hardware calculation.
 
+![attention](figure/attention.png)
+
 ### PE_2D
+- Use 2D Systolic array to do 2D matrix multiplication.
+
+![PE_2D](figure/pe_2d.png)
 
 ### Tanh
+
+![tanh](figure/tanh.png)
 
 #### Divider
 
 #### Exp
 
+![exp](figure/exp.png)
+
 ## MLP
 - MLP layer only use 1x1 convolution, so it is very easy. You can extend it to multi channel in the future.
 
-## Stage
-- Stage module contain 2-head attention or 4-head attention and then 2 MLP layer.
-
 ## Average Pooling
 - Now, it can only support caculate value's average number, not a real pooling.
+
+![avg](figure/avg.png)
