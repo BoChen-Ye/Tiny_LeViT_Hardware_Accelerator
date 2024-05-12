@@ -1,5 +1,5 @@
 # Tiny_LeViT_Hardware_Accelerator
- This is my hobby project by using System Verilog. I worked on this project continuously for about 4-5 weeks, only dedicating evenings and weekends to it. I wrote approximately 2000+ lines of SV design code and 1900+ testbench code in total.
+ This is my hobby project by using System Verilog. I worked on this project continuously for about 4-5 weeks, only dedicating evenings and weekends to it. I wrote approximately 2000+ lines of SV design code and 1900+ testbench code in total. It will cost 97000+ LUT and 51000+ FF in FPGA implementation(Vivado).
  
  This work is based on [LeViT: a Vision Transformer in ConvNet’s Clothing for Faster Inference](https://github.com/facebookresearch/LeViT).
 
@@ -10,7 +10,7 @@
 
  Of course, due to the complexity of hardware accelerators and network functions, many problems arise during the simplification process, some of which are yet to be resolved or will be addressed in the future.
 
- Problem: 1) It not support float-point number and arithmetic operation. 2) It not support multi-channel. 3) It is only behavior model, not all synthesizable until now. 4) It has wrong connection in multi-head block because I don't understand multi-head attention when I make it. 5) Divider is not good and some module will have overflow problem.
+ Problem: 1) It not support float-point number and arithmetic operation. 2) It not support multi-channel. 3) It can be synthesized but I didn't verify the post-synthesize timing simulation. 4) It has wrong connection in multi-head block because I don't understand multi-head attention when I make it. 5) Divider is not good and some module will have overflow problem.
 
  Anyway, if you have questions or improvements, just tell me. Thanks!
 
