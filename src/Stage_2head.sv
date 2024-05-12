@@ -19,8 +19,7 @@ module Stage_2head#(
 	logic end_flag;
 	
 	//attention core example
-	Attention_2head #(.conv_Q(Q),.conv_K(K),
-					 .conv_V(V),.conv_att(att),.mlp(mlp)) 
+	Attention_2head #(Q,K,V,att,mlp) 
 	u_2head(
 		.*,
 		.i_2head(i_stage),

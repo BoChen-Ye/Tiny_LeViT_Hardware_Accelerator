@@ -19,8 +19,7 @@ module Stage_4head#(
 	logic end_flag;
 	
 	//attention core example
-	Attention_4head #(.conv_Q(Q),.conv_K(K),
-					 .conv_V(V),.conv_att(att),.mlp(mlp)) 
+	Attention_4head #(Q,K,V,att,mlp) 
 	u_2head(
 		.*,
 		.i_4head(i_stage),

@@ -190,7 +190,6 @@ module Attention_core#(
 	  case(cs)
 		IDLE:begin
 			i_tanh<='d0;
-			rf_tanh<='d0;
 			i_v<='d0;
 			mul_tanh<='d0;
 			en_tanh<=1'b0;
@@ -209,7 +208,6 @@ module Attention_core#(
 		end
 		default:begin
 			i_tanh<='d0;
-			rf_tanh<='d0;
 			i_v<='d0;
 			mul_tanh<='d0;
 			en_tanh<=1'b0;
