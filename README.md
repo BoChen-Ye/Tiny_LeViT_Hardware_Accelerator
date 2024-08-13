@@ -8,11 +8,8 @@
  All design file are in ```src``` folder and testbench in ```sim``` folder, include:
  Completed: 
  1) finishied Tiny LeViT Hardware Accelerator.
-
  2) finished Convolutional layer and Attention layer. 
-
  3) finished Tanh function and divider module. 
-
  4) finished Average pooling module.
 
  Of course, due to the complexity of hardware accelerators and network functions, many problems arise during the simplification process, some of which are yet to be resolved or will be addressed in the future.
