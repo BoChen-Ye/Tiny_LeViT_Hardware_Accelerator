@@ -18,7 +18,7 @@
  1) It not support float-point number and arithmetic operation.
  2) It not support multi-channel. 
  3) It can be synthesized but I didn't verify the post-synthesize timing simulation. 
- 4) It has wrong connection in multi-head block because I don't understand multi-head attention when I make it. 
+ 4) It has wrong connection in multi-head block because I don't understand multi-head attention when I make it (Multi-head results should be spliced together into a matrix instead of being added.). 
  5) Divider is not good and some module will have overflow problem.
 
  Anyway, if you have questions or improvements, just tell me. Thanks!
