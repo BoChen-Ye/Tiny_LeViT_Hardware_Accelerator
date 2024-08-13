@@ -6,11 +6,23 @@
  But I've simplified the original large network into a smaller one, so I call it **Tiny_LeViT**.
 
  All design file are in ```src``` folder and testbench in ```sim``` folder, include:
- Completed: 1) finishied Tiny LeViT Hardware Accelerator. 2)finished Convolutional layer and Attention layer. 3) finished Tanh function and divider module. 4) finished Average pooling module.
+ Completed: 
+ 1) finishied Tiny LeViT Hardware Accelerator.
+
+ 2) finished Convolutional layer and Attention layer. 
+
+ 3) finished Tanh function and divider module. 
+
+ 4) finished Average pooling module.
 
  Of course, due to the complexity of hardware accelerators and network functions, many problems arise during the simplification process, some of which are yet to be resolved or will be addressed in the future.
 
- Problem: 1) It not support float-point number and arithmetic operation. 2) It not support multi-channel. 3) It can be synthesized but I didn't verify the post-synthesize timing simulation. 4) It has wrong connection in multi-head block because I don't understand multi-head attention when I make it. 5) Divider is not good and some module will have overflow problem.
+ Problem: 
+ 1) It not support float-point number and arithmetic operation.
+ 2) It not support multi-channel. 
+ 3) It can be synthesized but I didn't verify the post-synthesize timing simulation. 
+ 4) It has wrong connection in multi-head block because I don't understand multi-head attention when I make it. 
+ 5) Divider is not good and some module will have overflow problem.
 
  Anyway, if you have questions or improvements, just tell me. Thanks!
 
@@ -61,8 +73,8 @@
 ### Attention_core
 - For attention layer, use Tanh instead of softmax and use ReLU instead of Hardswish to simplify that difficulty of hardware calculation.
 - Tanh function is a complex module in this core.
-- We need buffer to store the data and do matrix multiplicayion.
-
+- We need buffer to store the data and do matrix multiplication.
+- Delay is 34 cycle.
 ![attention](figure/attention.png)
 
 ### PE_2D
@@ -71,7 +83,7 @@
 ![PE_2D](figure/pe_2d.png)
 
 ### Tanh
-- formula of tanh is $\frac{e^x-e^(-x)}{e^x+e^(-x)}$.
+- formula of tanh is $\frac{e^x - e^{(-x)}}{e^x+e^{(-x)}}$.
 - This module contain two Exp module and 1 divider.
 
 ![tanh](figure/tanh.png)
